@@ -115,7 +115,10 @@ pub async fn send_bundle_with_confirmation(
             Some(BundleResultType::Accepted(Accepted {
                 slot: _s,
                 validator_identity: _v,
-            })) => {}
+            })) => {
+                info!("accepted into slot {} by {}", _s, _v);
+                return Ok(());
+            }
             Some(BundleResultType::Rejected(rejected)) => {
                 match rejected.reason {
                     Some(Reason::WinningBatchBidRejected(WinningBatchBidRejected {
